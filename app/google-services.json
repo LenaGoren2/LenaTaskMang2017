@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1058471868495",
+    "firebase_url": "https://lenataskmang2017.firebaseio.com",
+    "project_id": "lenataskmang2017",
+    "storage_bucket": "lenataskmang2017.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1058471868495:android:d22bd71b4ad8235a",
+        "android_client_info": {
+          "package_name": "com.goren.lena.lenataskmang2017"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1058471868495-6c5makvb8u0je7o29419aau0uk70tal3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.goren.lena.lenataskmang2017",
+            "certificate_hash": "c8a042734ea6093bc4c9d0773b138c1f6ad67ece"
+          }
+        },
+        {
+          "client_id": "1058471868495-odb1ru9v4lpadsilpc5tn3udt3s4af84.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBljUY1nOC4KU4uHol2ammzzgENzT8pCbw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1058471868495-odb1ru9v4lpadsilpc5tn3udt3s4af84.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
