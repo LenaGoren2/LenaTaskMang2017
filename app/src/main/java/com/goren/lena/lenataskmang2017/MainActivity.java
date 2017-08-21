@@ -1,5 +1,6 @@
 package com.goren.lena.lenataskmang2017;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -25,6 +26,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.ValueEventListener;
 import com.goren.lena.lenataskmang2017.data.DBUtils;
+import com.goren.lena.lenataskmang2017.data.MyGroup;
 import com.goren.lena.lenataskmang2017.data.MyTask;
 import com.goren.lena.lenataskmang2017.main_fragments.MyGroupsFragment;
 import com.goren.lena.lenataskmang2017.main_fragments.MyTasksFragment;
@@ -53,9 +55,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        fragments=new Fragment[2];
-        fragments[0]=new MyTasksFragment();
-        fragments[1]=new MyGroupsFragment();
+        fragments = new Fragment[2];
+        fragments[0] = new MyTasksFragment();
+        fragments[1] = new MyGroupsFragment();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -71,44 +73,33 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(mViewPager);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener()
-        {
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
-                final MyTask myTask=new MyTask();
-                myTask.setCreatedAt(System.currentTimeMillis());
-                myTask.setText("todo"+System.currentTimeMillis());
-                myTask.setCompleted(false);
-                myTask.setAddress("haifa");
-                myTask.setGKey("group1");
-                myTask.setuKey(DBUtils.auth.getCurrentUser().getEmail());
-                myTask.settKey(DBUtils.myTasksRef.push().getKey());
-                DBUtils.myTasksRef.child(myTask.gettKey()).setValue(myTask).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful())
-                        {
-                            Toast.makeText(MainActivity.this, myTask.getText()+" Added", Toast.LENGTH_SHORT).show();
-                        }
-                        else
-                        {
-                            Toast.makeText(MainActivity.this,  myTask.getText()+" Failed", Toast.LENGTH_SHORT).show();
-                        }
+            public void onClick(View view) {
+                // Intent intent=new Intent(getBaseContext(),AddGroupActivity.class);
+                //  startActivity(intent);
 
-                    }
-                });
+                //  Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
 
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                MyGroup myGroup = new MyGroup();
+                myGroup.setMngrUKey(DBUtils.auth.getCurrentUser().getEmail());
+                myGroup.setName("g" + System.currentTimeMillis());
+                myGroup.addUsersKeys(myGroup.getMngrUKey().replace('.', '*'));
+
+                myGroup.setgKey(DBUtils.myGroupRef.push().getKey());
+                DBUtils.myGroupRef.child(myGroup.getgKey()).setValue(myGroup);
             }
         });
-
     }
 
 
+
+
+
+
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu)
+        {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
@@ -157,14 +148,16 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
-        public int getCount() {
+        public int getCount()
+        {
             // Show 3 total pages.
             //TODO change it to fragments number
             return fragments.length;
         }
         //TODO change it to be dynamic
         @Override
-        public CharSequence getPageTitle(int position) {
+        public CharSequence getPageTitle(int position)
+        {
 //            switch (position) {
 //                case 0:
 //                    return "SECTION 1";

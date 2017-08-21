@@ -1,6 +1,5 @@
 package com.goren.lena.lenataskmang2017;
 
-import android.net.Uri;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,20 +13,14 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-
-import android.widget.TextView;
 
 
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.goren.lena.lenataskmang2017.group_fragments.MembersFragment;
-import com.goren.lena.lenataskmang2017.group_fragments.TasksFragment;
-import com.goren.lena.lenataskmang2017.main_fragments.MyGroupsFragment;
-import com.goren.lena.lenataskmang2017.main_fragments.MyTasksFragment;
+import com.goren.lena.lenataskmang2017.group_fragments.GroupMembersFragment;
+import com.goren.lena.lenataskmang2017.group_fragments.GroupTasksFragment;
 
 public class GroupActivity extends AppCompatActivity {
 
@@ -59,8 +52,8 @@ public class GroupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_group);
 
         fragments = new Fragment[2];
-        fragments[0] = new TasksFragment();
-        fragments[1] = new MembersFragment();
+        fragments[0] = new GroupTasksFragment();
+        fragments[1] = new GroupMembersFragment();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
