@@ -16,6 +16,9 @@ import com.goren.lena.lenataskmang2017.data.DBUtils;
 import com.goren.lena.lenataskmang2017.data.GroupAdapter;
 import com.goren.lena.lenataskmang2017.data.MyGroup;
 
+import java.util.HashMap;
+import java.util.Objects;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -26,6 +29,44 @@ public class MyGroupsFragment extends Fragment implements TitleAble {
 
     public MyGroupsFragment() {
         // Required empty public constructor
+    }
+
+    private void initListView()
+    {
+        String userEmail=DBUtils.auth.getCurrentUser().getEmail();
+        DBUtils.myUsersRef.child(userEmail.replace('.','*')+"/groupKeys").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot)
+            {
+                HashMap<String,Object> groupKeys=(HashMap<String,Object>) dataSnapshot.getValue();
+                groupAdapter.clear();;
+                if(groupKeys!=null)
+                {
+                    for (String gr: groupKeys.keySet() )
+                    {
+                        DBUtils.myGroupRef.child(gr).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                MyGroup myGroup=dataSnapshot.getValue(MyGroup.class);
+                                groupAdapter.add(myGroup);
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+                    }
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
 
@@ -42,27 +83,8 @@ public class MyGroupsFragment extends Fragment implements TitleAble {
 
     }
     // connect the list view to the data source by Adapter
-    private void initListView()
-    {
-        DBUtils.myGroupRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                groupAdapter.clear();
-                for (DataSnapshot ds:dataSnapshot.getChildren())
-                {
-                    MyGroup myGroup=ds.getValue(MyGroup.class);
-                    groupAdapter.add(myGroup);
-                }
-                lstVGroups.setAdapter(groupAdapter);
 
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-    }
 
     public String getTitle()
     {

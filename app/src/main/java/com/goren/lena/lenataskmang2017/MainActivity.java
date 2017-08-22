@@ -76,18 +76,18 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Intent intent=new Intent(getBaseContext(),AddGroupActivity.class);
-                //  startActivity(intent);
+                 Intent intent=new Intent(getBaseContext(),AddGroupActivity.class);
+                  startActivity(intent);
 
-                //  Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                  Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
 
-                MyGroup myGroup = new MyGroup();
-                myGroup.setMngrUKey(DBUtils.auth.getCurrentUser().getEmail());
-                myGroup.setName("g" + System.currentTimeMillis());
-                myGroup.addUsersKeys(myGroup.getMngrUKey().replace('.', '*'));
-
-                myGroup.setgKey(DBUtils.myGroupRef.push().getKey());
-                DBUtils.myGroupRef.child(myGroup.getgKey()).setValue(myGroup);
+//                MyGroup myGroup = new MyGroup();
+//                myGroup.setMngrUKey(DBUtils.auth.getCurrentUser().getEmail());
+//                myGroup.setName("g" + System.currentTimeMillis());
+//                myGroup.addUsersKeys(myGroup.getMngrUKey().replace('.', '*'));
+//
+//                myGroup.setgKey(DBUtils.myGroupRef.push().getKey());
+//                DBUtils.myGroupRef.child(myGroup.getgKey()).setValue(myGroup);
             }
         });
     }

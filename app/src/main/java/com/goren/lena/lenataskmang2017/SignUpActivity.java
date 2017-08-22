@@ -63,7 +63,7 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void datahandler() {
-         final String stEmail = etEmail.getText().toString();
+        final String stEmail = etEmail.getText().toString();
         final String stPassword = etPassword.getText().toString();
         final String stRePassword = etRePassword.getText().toString();
         final String stName = etName.getText().toString();
@@ -85,7 +85,6 @@ public class SignUpActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task)
                 {
-
                     if (task.isSuccessful())
                     {
                         MyUser myUser=new MyUser();
@@ -93,7 +92,7 @@ public class SignUpActivity extends AppCompatActivity {
                         myUser.setPhone(stPhone);
                         myUser.setuKey_email(stEmail);
 
-                        DBUtils.myUsersRef.child(myUser.getuKey_email()).setValue(myUser).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        DBUtils.myUsersRef.child(myUser.getuKey_email().replace('.','*')).setValue(myUser).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 progressDialog.dismiss();
